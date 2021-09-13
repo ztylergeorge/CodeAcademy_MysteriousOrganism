@@ -76,6 +76,34 @@ const pAequorFactory = (specimenID, dna) => {
       }
 
       return Math.floor(cOrG / 15 * 100) > 60;
+    },
+
+    //return complement strand of DNA
+    complementStrand() {
+
+      let complementStrandDNA = [];
+
+      //iterate through DNA strand and add to complement strand based on base
+      for (let i = 0; i < this.dna.length; i++) {
+
+        switch(this.dna[i]) {
+          case "A":
+            complementStrandDNA.push("T");
+            break;
+          case "T":
+            complementStrandDNA.push("A");
+            break;
+          case "G":
+            complementStrandDNA.push("C");
+            break;
+          case "C":
+            complementStrandDNA.push("G");
+            break;
+        }
+      }
+
+      return complementStrandDNA;
+
     }
   });
 }
@@ -93,6 +121,12 @@ for (let i = 1; i <= 30; i++) {
   }
 
   specimenArray.push(specimen);
+
+}
+
+for (let i = 0; i < specimenArray[0].dna.length; i++) {
+
+  console.log(`${specimenArray[0].dna[i]} ${specimenArray[0].complementStrand()[i]}`);
 
 }
 
