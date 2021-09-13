@@ -35,14 +35,40 @@ const pAequorFactory = (specimenID, dna) => {
       this.dna[dnaIndex] = newSequence;
 
       return this.dna;
+    },
+
+    //compare to DNA to another object
+    compareDNA(specimen2) {
+
+      //output if specimenIDs are the same
+      if (this.specimenID === specimen2.specimenID) {
+        console.log(`These two specimens have the same ID: ${this.specimenID}`);
+      }
+      else {
+
+        let common = 0;
+        
+        //iterate through DNA to find matches
+        for (let i = 0; i < 15; i++) {
+
+          console.log(this.dna[i]);
+          console.log(specimen2.dna[i]);
+          
+          if (this.dna[i] === specimen2.dna[i]) {
+            console.log("MATCH");
+            common++;
+          }
+
+        }
+
+        console.log("Common " + common);
+        //output matches
+        console.log(`${this.specimenID} and ${specimen2.specimenID} have ${Math.floor(common / 15 * 100)} % of DNA in common.`);
+
+      }
     }
   });
 }
-
-let spec1 = pAequorFactory(1, mockUpStrand());
-console.log(spec1.dna);
-spec1.mutate();
-console.log(spec1.dna);
 
 
 
