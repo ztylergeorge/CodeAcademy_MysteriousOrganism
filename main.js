@@ -66,10 +66,24 @@ const pAequorFactory = (specimenID, dna) => {
         console.log(`${this.specimenID} and ${specimen2.specimenID} have ${Math.floor(common / 15 * 100)} % of DNA in common.`);
 
       }
+    }, 
+
+    //return survival likelihood, if C or G bases is greater than 60%
+    willLikelySurvive() {
+
+      let cOrG = 0;
+
+      //count c or g's in sequence
+      this.dna.forEach(base => {
+        if ((base === 'C') || (base === 'G')) {
+          cOrG++;
+        }
+      });
+
+      return Math.floor(cOrG / 15 * 100) > 60;
     }
   });
 }
-
 
 
 
