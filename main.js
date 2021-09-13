@@ -50,18 +50,13 @@ const pAequorFactory = (specimenID, dna) => {
         
         //iterate through DNA to find matches
         for (let i = 0; i < 15; i++) {
-
-          console.log(this.dna[i]);
-          console.log(specimen2.dna[i]);
           
           if (this.dna[i] === specimen2.dna[i]) {
-            console.log("MATCH");
             common++;
           }
 
         }
 
-        console.log("Common " + common);
         //output matches
         console.log(`${this.specimenID} and ${specimen2.specimenID} have ${Math.floor(common / 15 * 100)} % of DNA in common.`);
 
@@ -74,18 +69,32 @@ const pAequorFactory = (specimenID, dna) => {
       let cOrG = 0;
 
       //count c or g's in sequence
-      this.dna.forEach(base => {
-        if ((base === 'C') || (base === 'G')) {
+      for (let i = 0; i < this.dna.length; i++) {
+        if ((this.dna[i] === "C") || (this.dna[i] === "G")) {
           cOrG++;
         }
-      });
+      }
 
       return Math.floor(cOrG / 15 * 100) > 60;
     }
   });
 }
 
+//create 30 instances of pAequor that will survive and store in an array
+let specimenArray = [];
 
+for (let i = 1; i <= 30; i++) {
+
+  let specimen = pAequorFactory(i, mockUpStrand);
+
+  //create new strand if specimen will not survive
+  while (!specimen.willLikelySurvive()) {
+    specimen.dna = mockUpStrand();
+  }
+
+  specimenArray.push(specimen);
+
+}
 
 
 
