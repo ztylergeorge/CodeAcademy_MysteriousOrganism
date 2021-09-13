@@ -57,8 +57,8 @@ const pAequorFactory = (specimenID, dna) => {
 
         }
 
-        //output matches
-        console.log(`${this.specimenID} and ${specimen2.specimenID} have ${Math.floor(common / 15 * 100)} % of DNA in common.`);
+        //return percentage of how much they are in common
+        return Math.floor(common / 15 * 100);
 
       }
     }, 
@@ -124,11 +124,25 @@ for (let i = 1; i <= 30; i++) {
 
 }
 
-for (let i = 0; i < specimenArray[0].dna.length; i++) {
+//find the two most related specimens
+let specimenA = 1;
+let specimenB = 2;
+let maxPercent = 0;
 
-  console.log(`${specimenArray[0].dna[i]} ${specimenArray[0].complementStrand()[i]}`);
+//iterate through specimenArray to find the specimens with the most in common
+for (let i = 0; i < specimenArray.length; i++) {
 
+  for (let j = i + 1; j < specimenArray.length; j++) {
+
+    if (specimenArray[i].compareDNA(specimenArray[j]) > maxPercent) {
+      specimenA = specimenArray[i].specimenID;
+      specimenB = specimenArray[j].specimenID;
+      maxPercent = specimenArray[i].compareDNA(specimenArray[j]);
+    }
+  }
 }
+
+console.log(`${specimenA} and ${specimenB} have ${maxPercent} % of DNA in common. They are the most alike.`);
 
 
 
